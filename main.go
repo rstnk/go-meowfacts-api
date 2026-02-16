@@ -17,11 +17,11 @@ type CatFact struct {
 func main() {
 	res, err := http.Get(Endpoint)
 	if err != nil {
-		log.Fatal("failed to get url:", Endpoint)
+		log.Fatal("failed to get url:", err)
 	}
 	defer res.Body.Close()
 
-	if res.StatusCode != 200 {
+	if res.StatusCode != http.StatusOK {
 		log.Fatalf("got status %d", res.StatusCode)
 	}
 
