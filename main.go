@@ -21,13 +21,13 @@ func main() {
 	}
 	defer res.Body.Close()
 
+	if res.StatusCode != 200 {
+		log.Fatalf("got status %d", res.StatusCode)
+	}
+
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		log.Fatal("failed to read data:", err)
-	}
-
-	if res.StatusCode != 200 {
-		log.Fatalf("got status %d", res.StatusCode)
 	}
 
 	var cf CatFact
@@ -39,5 +39,4 @@ func main() {
 		log.Fatal("no cat facts!")
 	}
 	fmt.Println(cf.Fact[0])
-
 }
